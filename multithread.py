@@ -60,10 +60,11 @@ def crawler(thread_name, q, prefix):
             resp = requests.options(prefix + url + para, headers=headers, verify=False, timeout=20)
         else:
             raise Exception("Invalid method!", method)
-        # 打印：队列长度，线程名，响应吗，正在访问的url
-        print(q.qsize(), thread_name, method, resp.status_code, url, para)
+
+        waf_ip = resp.headers["WAF-ip"] if "WAF-ip" in headers else "unknown"
+        print(q.qsize(), thread_name, method, '[' + str(resp.status_code) + ']', url + para, 'WAFip: ' + waf_ip)
     except Exception as e:
-        print(q.qsize(), thread_name, "Error: ", method, url, para, e)
+        print(q.qsize(), thread_name, "Error: ", method, url, url + para, e)
 
 
 def threads_run(prefix, request_list, repeat_num=1, thread_num=10):
@@ -100,4 +101,3 @@ def threads_run(prefix, request_list, repeat_num=1, thread_num=10):
 #
 #
 #     threads_run(prefix, [], 50, 20)
-
