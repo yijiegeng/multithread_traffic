@@ -19,7 +19,6 @@ class requestNode:
 def work(thread_name, q, prefix):
     while True:
         if q.empty():
-            print("Exiting ", thread_name)
             return
         else:
             crawler(thread_name, q, prefix)
@@ -61,7 +60,7 @@ def crawler(thread_name, q, prefix):
         else:
             raise Exception("Invalid method!", method)
 
-        waf_ip = resp.headers["WAF-ip"] if "WAF-ip" in headers else "unknown"
+        waf_ip = resp.headers["WAF-ip"] if "WAF-ip" in resp.headers else "unknown"
         print(q.qsize(), thread_name, method, '[' + str(resp.status_code) + ']', url + para, 'WAFip: ' + waf_ip)
     except Exception as e:
         print(q.qsize(), thread_name, "Error: ", method, url, url + para, e)
