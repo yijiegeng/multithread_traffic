@@ -40,7 +40,7 @@ def generate_nodelist():
     print(ip)
 
     urls = ["/US", "/Korea", "/Singapore", "/Canada", "/Tokyo", "/Hongkong"]
-    codes = ['600', '601', '602', '603', '604', '605']
+    codes = ['500', '501', '502', '503', '504', '505']
     agents = ['agent0', 'agent1', 'agent2', 'agent3', 'agent4', 'agent5']
     methods = ['OPTIONS', 'PATCH', 'DELETE', 'PUT', 'POST', 'GET']
     nodelist = []
